@@ -12,20 +12,20 @@ public class Koordinat {
     int row;
     int col;
 
-    public int getBeban() {
-        return beban;
+    public int getDistance() {
+        return distance;
     }
 
-    public int setBeban(int beban){
-        return this.beban = this.beban + beban;
+    public int addBebanDistances(int beban){
+        return this.distance = this.distance + beban;
     }
 
-    int beban;
+    int distance;
 
     public Koordinat(int row, int col){
         this.row = row;
         this.col = col;
-        this.beban = 0;
+        this.distance = 0;
     }
 
     public void keAtas(){
@@ -41,14 +41,19 @@ public class Koordinat {
     }
 
     public boolean checkAtas(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
-        int tempRow = this.row;
+        int tempRow = this.row - 1;
         int tempCol = this.col;
+        boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
+        System.out.println(" ======= Checking ======");
+        System.out.println("tempRow : " + this.row);
+        System.out.println("tempCol : " + this.col);
+        System.out.println("checkAtas : " + status);
+        System.out.println(" ======= ======= ======");
 
-        if(maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol]){
-            return true; // you can go up
-        }
 
-        return false; // nu uh, you stay there
+
+        return maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol]; // you can go up
+// nu uh, you stay there
     }
 
 
@@ -56,7 +61,7 @@ public class Koordinat {
 
 
     public void tambahBeban(){
-        this.beban++;
+        this.distance++;
     };
 
     public void printKoordinat(){
