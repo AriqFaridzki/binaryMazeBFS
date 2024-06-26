@@ -44,25 +44,98 @@ public class Koordinat {
         int tempRow = this.row - 1;
         int tempCol = this.col;
         boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
-        System.out.println(" ======= Checking ======");
+
+        System.out.println(" == Cek Ke Atas ==");
         System.out.println("tempRow : " + this.row);
         System.out.println("tempCol : " + this.col);
-        System.out.println("checkAtas : " + status);
-        System.out.println(" ======= ======= ======");
+
+        if(status) {
+            System.out.println("Status : " + status);
+            System.out.println(" ======= ======= ======");
+            return status;
+        } else {
+            System.out.println("Status : " + false);
+            System.out.println(" ======= ======= ======");
+        }
 
 
 
-        return maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol]; // you can go up
+        return false;
+// nu uh, you stay there
+    }
+    public boolean checkBawah(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
+        int tempRow = this.row + 1;
+        int tempCol = this.col;
+        boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
+
+            System.out.println(" == Cek Ke Bawah ==");
+            System.out.println("tempRow : " + this.row);
+            System.out.println("tempCol : " + this.col);
+        if(status) {
+            System.out.println("Status : " + status);
+            System.out.println(" ======= ======= ======");
+            return status;
+        } else {
+            System.out.println("Status : " + false);
+            System.out.println(" ======= ======= ======");
+        }
+
+
+        return false;
+
+
+// nu uh, you stay there
+    }
+    public boolean checkKiri(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
+        int tempRow = this.row;
+        int tempCol = this.col - 1;
+        boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
+
+            System.out.println(" == Cek Ke kiri ==");
+            System.out.println("tempRow : " + this.row);
+            System.out.println("tempCol : " + this.col);
+
+        if(status) {
+            System.out.println("Status : " + status);
+            System.out.println(" ======= ======= ======");
+            return status;
+        } else {
+            System.out.println("Status : " + false);
+            System.out.println(" ======= ======= ======");
+        }
+
+
+
+        return false;
+// nu uh, you stay there
+    }
+    public boolean checkKanan(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
+        int tempRow = this.row;
+        int tempCol = this.col + 2;
+        boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
+
+            System.out.println(" == Cek Ke Kanan ==");
+            System.out.println("tempRow : " + this.row);
+            System.out.println("tempCol : " + this.col);
+
+        if(status) {
+            System.out.println("Status : " + status);
+            System.out.println(" ======= ======= ======");
+            return status;
+        } else {
+            System.out.println("Status : " + false);
+            System.out.println(" ======= ======= ======");
+        }
+
+
+        return false;
+
 // nu uh, you stay there
     }
 
 
 
 
-
-    public void tambahBeban(){
-        this.distance++;
-    };
 
     public void printKoordinat(){
         System.out.println("Koordinat Sekarang : " + this.row + " " + this.col);

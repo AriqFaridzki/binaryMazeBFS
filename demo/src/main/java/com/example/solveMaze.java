@@ -56,6 +56,8 @@ public class solveMaze {
 
 
             // cek jika titikSekarang bisa ke atas
+
+            try{
             if(titikSekarang.checkAtas(maze, isVisited)) {
 
 //               int distances = titikSekarang.getDistance();
@@ -67,14 +69,13 @@ public class solveMaze {
                 Thread.sleep(1000);
 
                 tempTitik.keAtas(); // go up then ( sekarang koordinat tempTitik menjadi 8,0 )
+                isVisited[tempTitik.getRow()][tempTitik.getCol()]=true;
                 System.out.println("eksekusi pindah tempat ke atas...." + tempTitik.getRow() + " " + tempTitik.getCol());
                 Thread.sleep(1000);
 
                 tempTitik.addBebanDistances(1); // add bebanDistances
                 System.out.println("menambah distance + 1....");
                 Thread.sleep(1000);
-
-
 
                 /// add to the log history maze ( manual )
                 mazeHistory
@@ -89,9 +90,147 @@ public class solveMaze {
                 printMazePath(mazeHistory);
                 System.out.println(" ");
 //                System.exit(0);
+
+                printQueue(queue);
+                System.out.println(" ");
+                printVisitedPoint(isVisited);
+            }
+            } catch (ArrayIndexOutOfBoundsException e){
+
             }
 
+            try{
+            if(titikSekarang.checkBawah(maze, isVisited)) {
+
+//               int distances = titikSekarang.getDistance();
+                // sengaja biar cek nanti bisa di ngecek dan tidak berubah variablenya
+
+                Koordinat tempTitik = titikSekarang;
+                System.out.println("TitikSekarang : " + tempTitik.getRow() + " " + tempTitik.getCol());
+                System.out.println("membuat clone titikSekarang dengan tempTitik....");
+                Thread.sleep(1000);
+
+                tempTitik.keBawah(); // go down then ( sekarang koordinat tempTitik menjadi 8,0 )
+                isVisited[tempTitik.getRow()][tempTitik.getCol()]=true;
+                System.out.println("eksekusi pindah tempat ke Bawah...." + tempTitik.getRow() + " " + tempTitik.getCol());
+                Thread.sleep(1000);
+
+                tempTitik.addBebanDistances(1); // add bebanDistances
+                System.out.println("menambah distance + 1....");
+                Thread.sleep(1000);
+
+                /// add to the log history maze ( manual )
+                mazeHistory
+                        [tempTitik.getRow()]
+                        [tempTitik.getCol()] = titikSekarang.getDistance();
+                System.out.println("mencatat ke log history....");
+
+                Thread.sleep(1000);
+                queue.offer(tempTitik); // save Checkpoint ( add to the queue )
+                System.out.println("memasukan ke titik baru queue....");
+
+                printMazePath(mazeHistory);
+                System.out.println(" ");
+//                System.exit(0);
+
+                printQueue(queue);
+                System.out.println(" ");
+                printVisitedPoint(isVisited);
+
+
+            }
+            } catch (ArrayIndexOutOfBoundsException e){
+
+            }
+
+            try{
+            if(titikSekarang.checkKiri(maze, isVisited)) {
+
+//               int distances = titikSekarang.getDistance();
+                // sengaja biar cek nanti bisa di ngecek dan tidak berubah variablenya
+
+                Koordinat tempTitik = titikSekarang;
+                System.out.println("TitikSekarang : " + tempTitik.getRow() + " " + tempTitik.getCol());
+                System.out.println("membuat clone titikSekarang dengan tempTitik....");
+                Thread.sleep(1000);
+
+                tempTitik.keKiri(); // go down then ( sekarang koordinat tempTitik menjadi 8,0 )
+                isVisited[tempTitik.getRow()][tempTitik.getCol()]=true;
+                System.out.println("eksekusi pindah tempat ke Kiri...." + tempTitik.getRow() + " " + tempTitik.getCol());
+                Thread.sleep(1000);
+
+                tempTitik.addBebanDistances(1); // add bebanDistances
+                System.out.println("menambah distance + 1....");
+                Thread.sleep(1000);
+
+                /// add to the log history maze ( manual )
+                mazeHistory
+                        [tempTitik.getRow()]
+                        [tempTitik.getCol()] = titikSekarang.getDistance();
+                System.out.println("mencatat ke log history....");
+
+                Thread.sleep(1000);
+                queue.offer(tempTitik); // save Checkpoint ( add to the queue )
+                System.out.println("memasukan ke titik baru queue....");
+
+                printMazePath(mazeHistory);
+                System.out.println(" ");
+//                System.exit(0);
+
+                printQueue(queue);
+                System.out.println(" ");
+                printVisitedPoint(isVisited);
+
+            }
+            } catch (ArrayIndexOutOfBoundsException e){
+
+            }
+
+            try{
+            if(titikSekarang.checkKanan(maze, isVisited)) {
+
+//               int distances = titikSekarang.getDistance();
+                // sengaja biar cek nanti bisa di ngecek dan tidak berubah variablenya
+
+                Koordinat tempTitik = titikSekarang;
+                System.out.println("TitikSekarang : " + tempTitik.getRow() + " " + tempTitik.getCol());
+                System.out.println("membuat clone titikSekarang dengan tempTitik....");
+                Thread.sleep(1000);
+
+                tempTitik.keKanan(); // go down then ( sekarang koordinat tempTitik menjadi 8,0 )
+                isVisited[tempTitik.getRow()][tempTitik.getCol()]=true;
+                System.out.println("eksekusi pindah tempat ke Kanan...." + tempTitik.getRow() + " " + tempTitik.getCol());
+                Thread.sleep(1000);
+
+                tempTitik.addBebanDistances(1); // add bebanDistances
+                System.out.println("menambah distance + 1....");
+                Thread.sleep(1000);
+
+                /// add to the log history maze ( manual )
+                mazeHistory
+                        [tempTitik.getRow()]
+                        [tempTitik.getCol()] = titikSekarang.getDistance();
+                System.out.println("mencatat ke log history....");
+
+                Thread.sleep(1000);
+                queue.offer(tempTitik); // save Checkpoint ( add to the queue )
+                System.out.println("memasukan ke titik baru queue....");
+
+                printMazePath(mazeHistory);
+                System.out.println(" ");
+//                System.exit(0);
+
+                printQueue(queue);
+                System.out.println(" ");
+                printVisitedPoint(isVisited);
+
+            }
+            } catch (ArrayIndexOutOfBoundsException e){
+
+            }
         }
+
+
 
         return -1; // if no route to be found
     }
@@ -111,17 +250,19 @@ public class solveMaze {
         System.out.println("see Visited Point       : ");
 
         for (int i = 0; i < booleanMatrix.length; i++) {
-            System.out.println(booleanMatrix[i] + " - ");
+            System.out.print("Row " + i + " - ");
             for (int j = 0; j < booleanMatrix[i].length; j++) {
                 System.out.print(booleanMatrix[i][j] + "|");
             }
+            System.out.println();
         }
     }
 
-    public void printQueue(Queue<Koordinat> queueTitik){
+
+    public void printQueue(Queue<Koordinat> queue){
         System.out.println("titik Queue : ");
 
-        for (Koordinat titik : queueTitik){
+        for (Koordinat titik : queue){
         System.out.println("Titik : " + titik.getRow() + " " + titik.getCol());
         }
     }
