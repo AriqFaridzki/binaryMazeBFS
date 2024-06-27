@@ -27,7 +27,6 @@ public class solveMaze {
         while (!queue.isEmpty()) {
             titikSekarang = queue.poll();
             mazeHistoryDist[titikSekarang.getRow()][titikSekarang.getCol()] = titikSekarang.getDistance();
-            mazeHistory[titikSekarang.getRow()][titikSekarang.getCol()] = titikSekarang;
             int titikAkhirRow = this.titikAkhir.getRow();
             int titikAkhirCol = this.titikAkhir.getCol();
 
@@ -38,7 +37,7 @@ public class solveMaze {
 
             if (titikSekarang.getRow() == titikAkhirRow) {
                 if (titikSekarang.getCol() == titikAkhirCol) {
-                    printMazePath2(maze,mazeHistoryDist, titikSekarang);
+                    printMazePath(maze,mazeHistory, titikSekarang);
 //                    printKoodinatMaze(mazeHistory);
                     return titikSekarang.getDistance();
                 }
@@ -53,6 +52,7 @@ public class solveMaze {
                     tempTitik.setDistance(newDistance);
 
                     isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
                 }
@@ -68,6 +68,7 @@ public class solveMaze {
                     tempTitik.setDistance(newDistance);
 
                     isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
                 }
@@ -84,6 +85,7 @@ public class solveMaze {
                     tempTitik.setDistance(newDistance);
 
                     isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
                 }
@@ -100,6 +102,7 @@ public class solveMaze {
                     tempTitik.setDistance(newDistance);
 
                     isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
                 }
@@ -143,7 +146,7 @@ public class solveMaze {
 //                Row 5 - 4|5|6|7|8|
 //                Row 6 - 3|0|5|0|7|
 //                Row 7 - 2|3|4|5|6|
-//                Row 8 - 1|2|0|6|7|
+//                Row 8 - 1|2|0|6|7|`
 //                Row 9 - 0|0|0|0|0|
 
         // String[][] maze = {
@@ -167,7 +170,15 @@ public class solveMaze {
         // Koordinat[][] mazeHistory, ini koordinat array 2d
         // Koordinat destination
 
+
         String[][] fixedPath = new String[maze.length][maze[0].length];
+
+        for (int i = 0; i < maze.length; i++) {
+            for (int j = 0; j < maze[i].length; j++) {
+                fixedPath[i][j] = maze[i][j];
+            }
+        }
+
         int currentRow = destination.getRow(); // 0
         int currentCol = destination.getCol(); // 4
 
@@ -193,15 +204,15 @@ public class solveMaze {
 //
 //        }
 //
-//        for (int i = 0; i < fixedPath.length; i++) {
-//            System.out.print("Row " + i + " - ");
-//
-//            for (int j = 0; j < fixedPath[i].length; j++) {
-//                System.out.print(fixedPath[i][j] + "|");
-//            }
-//
-//            System.out.println();
-//        }
+        for (int i = 0; i < fixedPath.length; i++) {
+            System.out.print("Row " + i + " - ");
+
+            for (int j = 0; j < fixedPath[i].length; j++) {
+                System.out.print(fixedPath[i][j] + "|");
+            }
+
+            System.out.println();
+        }
 //    }
 
 //        public void printMazeDist(int[][] mazePathDist){
