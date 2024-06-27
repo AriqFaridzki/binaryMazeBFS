@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Maven app",
+            "request": "launch",
+            "mainClass": "com.example.Main", // Replace with your main class
+            // "classpath": "${workspaceFolder}/target/classes",
+            // "vmArguments": "-Dfile.encoding=UTF-8"
+        }
+    ]
+}
