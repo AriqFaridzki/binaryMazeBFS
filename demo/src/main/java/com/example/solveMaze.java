@@ -1,20 +1,21 @@
 package com.example;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 
 public class solveMaze {
     Koordinat titikAwal, titikAkhir;
+    boolean[][] visitedPath;
+    int numPath = 0;
 
-    public int bfs(String[][] maze, Koordinat titikAwal, Koordinat titikAkhir) throws InterruptedException {
+    public int bfs(String[][] maze, Koordinat titikAwal, Koordinat titikAkhir) {
         int mazeRow = maze.length;
         int mazeCol = maze[0].length;
         boolean[][] isVisited = new boolean[mazeRow][mazeCol];
 
         this.titikAwal = titikAwal;
         this.titikAkhir = titikAkhir;
-
-        int[][] mazeHistory = new int[mazeRow][mazeCol];
 
         Queue<Koordinat> queue = new LinkedList<>();
         queue.offer(this.titikAwal);
@@ -27,11 +28,6 @@ public class solveMaze {
             titikSekarang = queue.poll();
             int titikAkhirRow = this.titikAkhir.getRow();
             int titikAkhirCol = this.titikAkhir.getCol();
-
-//            System.out.println();
-//            printVisitedPoint(isVisited);
-//            System.out.println("Jarak Sekarang: " + titikSekarang.getDistance());
-//            System.out.println();
 
             if(titikSekarang.getRow() == titikAkhirRow) {
                 if (titikSekarang.getCol() == titikAkhirCol) {
@@ -99,6 +95,74 @@ public class solveMaze {
         }
 
         return 0;
+    }
+
+    public void path(String[][] mat, Koordinat koordinatSekarang, Koordinat koordinatTujuan, int min_dist) {
+        if (mat.length == 0 || mat[koordinatSekarang.getRow()][koordinatSekarang.getCol()].equals("#") || mat[koordinatTujuan.getRow()][koordinatTujuan.getCol()].equals("#"))  {
+            return;
+        }
+
+        int row = mat.length;
+        int col = mat[0].length;
+
+        this.visitedPath = new boolean[row][col];
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                this.visitedPath[i][j] = false;
+            }
+        }
+
+        findPath(mat, koordinatSekarang.getRow(), koordinatSekarang.getCol(), koordinatTujuan, min_dist, 0);
+    }
+
+    public int findPath(String[][] mat, int koordinatSekarangX, int koordinatSekarangY, Koordinat koordinatTujuan, int min_dist, int dist) {
+        if (koordinatSekarangX == koordinatTujuan.getRow() && koordinatSekarangY == koordinatTujuan.getCol()) {
+            if (dist == min_dist) {
+                this.numPath++;
+
+                System.out.println("|| - Path ke " + this.numPath);
+                for (int a = 0; a < this.visitedPath.length; a++) {
+                    System.out.print("||     [");
+                    for (int b = 0; b < this.visitedPath[0].length; b++) {
+                        if (a == koordinatSekarangX && b == koordinatSekarangY) {
+                            System.out.print(" P ");
+                        } else {
+                            System.out.print(" " + (this.visitedPath[a][b] ? "O" : "#") + " ");
+                        }
+                    }
+                    System.out.println("]");
+                }
+                System.out.println("|| ");
+            }
+
+            min_dist = Math.min(dist, min_dist);
+            return min_dist;
+        }
+
+        this.visitedPath[koordinatSekarangX][koordinatSekarangY] = true;
+
+        if (isSafe(mat, this.visitedPath, koordinatSekarangX + 1, koordinatSekarangY)) {
+            min_dist = findPath(mat, koordinatSekarangX + 1, koordinatSekarangY, koordinatTujuan, min_dist, dist + 1);
+        }
+
+        if (isSafe(mat, this.visitedPath, koordinatSekarangX, koordinatSekarangY + 1)) {
+            min_dist = findPath(mat, koordinatSekarangX, koordinatSekarangY + 1, koordinatTujuan, min_dist, dist + 1);
+        }
+
+        if (isSafe(mat, this.visitedPath, koordinatSekarangX - 1, koordinatSekarangY)) {
+            min_dist = findPath(mat, koordinatSekarangX - 1, koordinatSekarangY, koordinatTujuan, min_dist, dist + 1);
+        }
+
+        if (isSafe(mat, this.visitedPath, koordinatSekarangX, koordinatSekarangY - 1)) {
+            min_dist = findPath(mat, koordinatSekarangX, koordinatSekarangY - 1, koordinatTujuan, min_dist, dist + 1);
+        }
+
+        this.visitedPath[koordinatSekarangX][koordinatSekarangY] = false;
+        return min_dist;
+    }
+
+    static boolean isSafe(String[][] mat, boolean[][] visited, int x, int y) {
+        return (x >= 0 && x < mat.length && y >= 0 && y < mat[0].length && mat[x][y].equals(" ") && !visited[x][y]);
     }
 
     public void printVisitedPoint(boolean[][] booleanMatrix){

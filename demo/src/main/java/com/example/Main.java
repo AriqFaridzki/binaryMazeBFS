@@ -36,6 +36,10 @@ public class Main {
         } else {
             System.out.println("|| Tidak Ada Jalur/Path Menuju Destinasi Itu.");
         }
+
+        System.out.println("|| ");
+        System.out.println("|| Path Yang Memungkinkan: ");
+        solve.path(maze, source, dest, min_dist);
         System.out.println("||====================> Binary Maze <====================||");
     }
 }
