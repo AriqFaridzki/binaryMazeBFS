@@ -37,8 +37,24 @@ public class solveMaze {
 
             if (titikSekarang.getRow() == titikAkhirRow) {
                 if (titikSekarang.getCol() == titikAkhirCol) {
+
+//                    fixedPath[i][j] = "\uD83D\uDFE1";
+//                } else {
+//                    fixedPath[i][j] = "\uD83D\uDEA7";
+
+                    System.out.println("Jalan yang bisa diakses : " + "\uD83D\uDFE1");
+                    System.out.println("Jalan yang Terblokir : " + "\uD83D\uDEA7");
+                    System.out.println("Jalan yang Terblokir : " + "\uD83D\uDEE4\uFE0F");
+                    System.out.println(" ");
+                    System.out.println(" ==== Path Taken ===== ");
                     printMazePath(maze,mazeHistory, titikSekarang);
-//                    printKoodinatMaze(mazeHistory);
+                    System.out.println(" ==== ===== ");
+                    System.out.println(" ");
+
+                    System.out.println(" ==== Koordinat didalamnya ===== ");
+                    printKoodinatMaze(mazeHistory);
+                    System.out.println(" ==== ===== ");
+                    System.out.println(" ");
                     return titikSekarang.getDistance();
                 }
             }
@@ -175,7 +191,11 @@ public class solveMaze {
 
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                fixedPath[i][j] = maze[i][j];
+                if (maze[i][j].equals(" ")){
+                    fixedPath[i][j] = "\uD83D\uDFE1";
+                } else {
+                    fixedPath[i][j] = "\uD83D\uDEA7";
+                }
             }
         }
 
@@ -185,13 +205,13 @@ public class solveMaze {
         Koordinat next;
 
         while (currentRow != -1 && currentCol != -1) {
-            fixedPath[currentRow][currentCol] = "✨"; // tandai 0,4 dengan bintang
+            fixedPath[currentRow][currentCol] = "\uD83D\uDEE4\uFE0F"; // tandai 0,4 dengan bintang
 
             next = mazeHistory[currentRow][currentCol]; // akses mazeHistory dengan cords 0,4 yaitu sebuah koordinat
 
             if (next != null) { // jika koordinat yang diakses itu ndak null maka > ambil valuenya
-                currentRow = next.getRow();
-                currentCol = next.getCol();
+                currentRow = next.getRow(); // update koordinat yang baru
+                currentCol = next.getCol(); // update koordinat yang baru
             } else { // terminate loops
                 currentRow = -1;
                 currentCol = -1;
@@ -353,7 +373,12 @@ public class solveMaze {
             System.out.print("Row " + i + " - ");
 
             for (int j = 0; j < maze[i].length; j++) {
-                System.out.print(maze[i][j] + "|");
+                Koordinat k = maze[i][j];
+                if (k != null) {
+                    System.out.print("{" + k.getRow() + "," + k.getCol() + "}|");
+                } else {
+                    System.out.print("\uD83D\uDEA7\uD83D\uDEA7 |");
+                }
             }
 
             System.out.println();
