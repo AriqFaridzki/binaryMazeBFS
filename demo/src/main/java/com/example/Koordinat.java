@@ -1,6 +1,10 @@
 package com.example;
 
 public class Koordinat {
+    int row;
+    int col;
+    int distance;
+
     public int getRow() {
         return row;
     }
@@ -9,18 +13,17 @@ public class Koordinat {
         return col;
     }
 
-    int row;
-    int col;
-
     public int getDistance() {
         return distance;
+    }
+
+    public void setDistance(int beban) {
+        this.distance = beban;
     }
 
     public int addBebanDistances(int beban){
         return this.distance = this.distance + beban;
     }
-
-    int distance;
 
     public Koordinat(int row, int col){
         this.row = row;
@@ -37,7 +40,8 @@ public class Koordinat {
     public void keKiri(){
         this.col = this.col - 1;
     }
-    public void keKanan(){ this.col = this.col + 1;
+    public void keKanan(){ 
+        this.col = this.col + 1;
     }
 
     public boolean checkAtas(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
@@ -58,10 +62,8 @@ public class Koordinat {
             System.out.println(" ======= ======= ======");
         }
 
-
-
         return false;
-// nu uh, you stay there
+        // nu uh, you stay there
     }
     public boolean checkBawah(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
         int tempRow = this.row + 1;
@@ -111,7 +113,7 @@ public class Koordinat {
     }
     public boolean checkKanan(int[][] maze, boolean[][] isVisitedMatrix){ // just checking if you can go up
         int tempRow = this.row;
-        int tempCol = this.col + 2;
+        int tempCol = this.col + 1; //typo
         boolean status = maze[tempRow][tempCol] == 1 && !isVisitedMatrix[tempRow][tempCol];
 
             System.out.println(" == Cek Ke Kanan ==");
