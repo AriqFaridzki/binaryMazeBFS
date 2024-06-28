@@ -7,7 +7,7 @@ public class Main {
         solveMaze solve = new solveMaze();
 
         Koordinat source = new Koordinat(9,0);
-        Koordinat dest = new Koordinat(5,2);
+        Koordinat dest = new Koordinat(0,4);
 
         String[][] maze = {
             {" ", "#", " ", "#", " "},
@@ -23,14 +23,17 @@ public class Main {
         };
 
         System.out.println("||====================> Binary Maze <====================||");
-        int min_dist = solve.bfs(maze, source, dest);
 
-        System.out.println("|| Maze: ");
+        System.out.println("|| -> Maze: ");
         for (String[] mazeRow : maze) {
-            System.out.println("||\t" + Arrays.toString(mazeRow));
+            System.out.println("||\t\t" + Arrays.toString(mazeRow));
         }
         System.out.println("|| ");
 
+        int min_dist = solve.bfs(maze, source, dest);
+
+        System.out.println("|| ");
+        System.out.println("|| ");
         if (min_dist > 0) {
             System.out.println("|| Minimum Distance: " + min_dist);
         } else {

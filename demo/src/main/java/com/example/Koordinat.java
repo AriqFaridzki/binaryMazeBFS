@@ -46,48 +46,28 @@ public class Koordinat {
     public boolean checkAtas(String[][] maze, boolean[][] isVisitedMatrix) {
         int tempRow = this.row - 1;
         int tempCol = this.col;
-        boolean status = maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
 
-        if(status) {
-            return status;
-        }
-
-        return false;
+        return maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
     }
 
     public boolean checkBawah(String[][] maze, boolean[][] isVisitedMatrix) {
         int tempRow = this.row + 1;
         int tempCol = this.col;
-        boolean status = maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
 
-        if(status) {
-            return status;
-        }
-
-        return false;
+        return maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
     }
 
     public boolean checkKiri(String[][] maze, boolean[][] isVisitedMatrix) {
         int tempRow = this.row;
         int tempCol = this.col - 1;
-        boolean status = maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
 
-        if(status) {
-            return status;
-        }
-
-        return false;
+        return maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
     }
 
     public boolean checkKanan(String[][] maze, boolean[][] isVisitedMatrix) {
         int tempRow = this.row;
         int tempCol = this.col + 1;
-        boolean status = maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];;
 
-        if(status) {
-            return status;
-        }
-
-        return false;
+        return maze[tempRow][tempCol].equals(" ") && !isVisitedMatrix[tempRow][tempCol];
     }
 }
