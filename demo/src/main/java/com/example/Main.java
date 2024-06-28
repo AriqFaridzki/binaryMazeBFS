@@ -7,7 +7,7 @@ public class Main {
         solveMaze solve = new solveMaze();
 
         Koordinat source = new Koordinat(9,0);
-        Koordinat dest = new Koordinat(0,4);
+        Koordinat dest = new Koordinat(5,2);
 
         String[][] maze = {
             {" ", "#", " ", "#", " "},

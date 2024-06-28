@@ -43,8 +43,8 @@ public class solveMaze {
 //                    fixedPath[i][j] = "\uD83D\uDEA7";
 
                     System.out.println("Jalan yang bisa diakses : " + "\uD83D\uDFE1");
-                    System.out.println("Jalan yang Terblokir : " + "\uD83D\uDEA7");
-                    System.out.println("Jalan yang Terblokir : " + "\uD83D\uDEE4\uFE0F");
+                    System.out.println("Jalan yang Terblokir / not visited : " + "\uD83D\uDEA7");
+                    System.out.println("Jalan yang ditempuh : " + "\uD83D\uDEE4\uFE0F");
                     System.out.println(" ");
                     System.out.println(" ==== Path Taken ===== ");
                     printMazePath(maze,mazeHistory, titikSekarang);
@@ -54,6 +54,9 @@ public class solveMaze {
                     System.out.println(" ==== Koordinat didalamnya ===== ");
                     printKoodinatMaze(mazeHistory);
                     System.out.println(" ==== ===== ");
+                    System.out.println(" ");
+                    printMazeDistance(mazeHistoryDist);
+
                     System.out.println(" ");
                     return titikSekarang.getDistance();
                 }
@@ -368,7 +371,7 @@ public class solveMaze {
 
     }
 
-    public void printKoodinatMaze(Koordinat[][] maze) {
+    public void printKoodinatMaze(Koordinat [][] maze) {
         for (int i = 0; i < maze.length; i++) {
             System.out.print("Row " + i + " - ");
 
@@ -384,4 +387,18 @@ public class solveMaze {
             System.out.println();
         }
     }
+
+    public void printMazeDistance(int[][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            System.out.print("|");
+
+            for (int j = 0; j < maze[i].length; j++) {
+                System.out.print(maze[i][j] + "|");
+            }
+
+            System.out.println();
+        }
+    }
+
+
 }
