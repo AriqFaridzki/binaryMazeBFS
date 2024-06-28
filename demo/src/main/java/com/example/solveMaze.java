@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class solveMaze {
-
     public int bfs(String[][] maze, Koordinat titikAwal, Koordinat titikAkhir) {
         int mazeRow = maze.length;
         int mazeCol = maze[0].length;
@@ -103,20 +102,18 @@ public class solveMaze {
         System.out.println("||\t\tJalan yang Terblokir / not visited : " + "\uD83D\uDEA7");
         System.out.println("||\t\tJalan yang ditempuh : " + "\uD83D\uDEE4️");
         System.out.println("|| ");
-        System.out.println("||  ▪ Jalur Ditempuh:");
+        System.out.println("||    ▪ Jalur Ditempuh:");
         printMazePath(maze,mazeHistory, titikSekarang);
         System.out.println("|| ");
-        System.out.println("|| ");
 
-        System.out.println("||  ▪ Koordinat didalamnya:");
-        printKoodinatMaze(mazeHistory);
+        System.out.println("||    ▪ Koordinat didalamnya:");
+        printKoordinatMaze(maze);
         System.out.println("|| ");
-        System.out.println("|| ");
-        System.out.println("||  ▪ Perhitungan jarak tipa titik:");
+        System.out.println("||    ▪ Perhitungan jarak tiap titik:");
         printMazeDistance(mazeHistoryDist);
     }
 
-    public void printMazePath(String[][] maze, Koordinat[][] mazeHistory, Koordinat destination) {
+    private void printMazePath(String[][] maze, Koordinat[][] mazeHistory, Koordinat destination) {
         String[][] fixedPath = new String[maze.length][maze[0].length];
 
         for (int i = 0; i < maze.length; i++) {
@@ -148,27 +145,27 @@ public class solveMaze {
             }
         }
 
-        for (int i = 0; i < fixedPath.length; i++) {
-            System.out.print("||\t\tRow " + i + " - ");
+        for (String[] strings : fixedPath) {
+            System.out.print("||\t\t");
 
-            for (int j = 0; j < fixedPath[i].length; j++) {
-                System.out.print(fixedPath[i][j] + "|");
+            for (String string : strings) {
+                System.out.print(string + "|");
             }
 
             System.out.println();
         }
     }
 
-    public void printKoodinatMaze(Koordinat [][] maze) {
+    private void printKoordinatMaze(String [][] maze) {
         for (int i = 0; i < maze.length; i++) {
-            System.out.print("||\t\tRow " + i + " - ");
+            System.out.print("||\t\t");
 
             for (int j = 0; j < maze[i].length; j++) {
-                Koordinat k = maze[i][j];
-                if (k != null) {
-                    System.out.print("{" + k.getRow() + "," + k.getCol() + "}|");
+                String k = maze[i][j];
+                if (k.equals(" ")) {
+                    System.out.print("{" + i + "," + j + "}|");
                 } else {
-                    System.out.print("\uD83D\uDEA7\uD83D\uDEA7|");
+                    System.out.print("\uD83D\uDEA7.\uD83D\uDEA7|");
                 }
             }
 
@@ -176,12 +173,12 @@ public class solveMaze {
         }
     }
 
-    public void printMazeDistance(int[][] maze) {
+    private void printMazeDistance(int[][] maze) {
         for (int[] row : maze) {
             System.out.print("||\t\t|");
 
             for (int col : row) {
-                System.out.print(col + "|");
+                System.out.print(" " + (col < 10 ? "0" + col : col) + " |");
             }
 
             System.out.println();
