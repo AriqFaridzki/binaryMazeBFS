@@ -1,11 +1,9 @@
 package com.example;
 
 import java.util.Arrays;
-import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        Scanner in = new Scanner(System.in);
+    public static void main(String[] args) {
         solveMaze solve = new solveMaze();
 
         Koordinat source = new Koordinat(9,0);
@@ -24,6 +22,12 @@ public class Main {
             {" ", "#", "#", "#", "#"}
         };
 
+        printInterfaceHeader(maze);
+        int min_dist = solve.bfs(maze, source, dest);
+        printInterfaceFooter(min_dist);
+    }
+
+    public static void printInterfaceHeader(String[][] maze) {
         System.out.println("||====================> Binary Maze <====================||");
 
         System.out.println("|| --> Maze: ");
@@ -31,9 +35,9 @@ public class Main {
             System.out.println("||\t\t" + Arrays.toString(mazeRow));
         }
         System.out.println("|| ");
+    }
 
-        int min_dist = solve.bfs(maze, source, dest);
-
+    public static void printInterfaceFooter(int min_dist) {
         System.out.println("|| ");
         if (min_dist > 0) {
             System.out.println("|| Minimum Distance: " + min_dist);
