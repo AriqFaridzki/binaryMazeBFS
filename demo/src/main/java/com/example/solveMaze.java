@@ -10,6 +10,7 @@ public class solveMaze {
         int mazeCol = maze[0].length;
         boolean[][] isVisited = new boolean[mazeRow][mazeCol];
 
+
         int[][] mazeHistoryDist = new int[mazeRow][mazeCol];
         Koordinat[][] mazeHistory = new Koordinat[mazeRow][mazeCol];
 
@@ -19,6 +20,7 @@ public class solveMaze {
         isVisited[titikAwal.getRow()][titikAwal.getCol()] = true;
 
         Koordinat titikSekarang;
+        int nodeChecked = 0;
 
         while (!queue.isEmpty()) {
             titikSekarang = queue.poll();
@@ -28,7 +30,7 @@ public class solveMaze {
 
             if (titikSekarang.getRow() == titikAkhirRow) {
                 if (titikSekarang.getCol() == titikAkhirCol) {
-                    printVisualisasi(maze, mazeHistory, mazeHistoryDist, titikSekarang);
+                    printVisualisasi(maze, mazeHistory, mazeHistoryDist, titikSekarang, nodeChecked);
                     return titikSekarang.getDistance();
                 }
             }
@@ -45,8 +47,49 @@ public class solveMaze {
                     mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
+                    nodeChecked++;
                 }
             } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+            // Experimental
+
+            try {
+                if (titikSekarang.checkAtasKanan(maze, isVisited)) {
+                    Koordinat tempTitik = new Koordinat(titikSekarang.getRow(), titikSekarang.getCol());
+                    int newDistance = titikSekarang.getDistance() + 1;
+
+                    tempTitik.keAtasKanan();
+                    tempTitik.setDistance(newDistance);
+
+                    isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
+
+                    queue.offer(tempTitik);
+                    nodeChecked++;
+
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+            // Experimental
+
+            try {
+                if (titikSekarang.checkAtasKiri(maze, isVisited)) {
+                    Koordinat tempTitik = new Koordinat(titikSekarang.getRow(), titikSekarang.getCol());
+                    int newDistance = titikSekarang.getDistance() + 1;
+
+                    tempTitik.keAtasKiri();
+                    tempTitik.setDistance(newDistance);
+
+                    isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
+
+                    queue.offer(tempTitik);
+                    nodeChecked++;
+
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+
 
             try {
                 if (titikSekarang.checkBawah(maze, isVisited)) {
@@ -60,8 +103,12 @@ public class solveMaze {
                     mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
+                    nodeChecked++;
+
                 }
             } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+
 
             try {
                 if (titikSekarang.checkKiri(maze, isVisited)) {
@@ -75,6 +122,27 @@ public class solveMaze {
                     mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
+                    nodeChecked++;
+
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+            // Experimental
+
+            try {
+                if (titikSekarang.checkBawahKiri(maze, isVisited)) {
+                    Koordinat tempTitik = new Koordinat(titikSekarang.getRow(), titikSekarang.getCol());
+                    int newDistance = titikSekarang.getDistance() + 1;
+
+                    tempTitik.keBawahKiri();
+                    tempTitik.setDistance(newDistance);
+
+                    isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
+
+                    queue.offer(tempTitik);
+                    nodeChecked++;
+
                 }
             } catch (ArrayIndexOutOfBoundsException ignored) {}
 
@@ -90,6 +158,27 @@ public class solveMaze {
                     mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
 
                     queue.offer(tempTitik);
+                    nodeChecked++;
+
+                }
+            } catch (ArrayIndexOutOfBoundsException ignored) {}
+
+            // Experimental
+
+            try {
+                if (titikSekarang.checkBawahKanan(maze, isVisited)) {
+                    Koordinat tempTitik = new Koordinat(titikSekarang.getRow(), titikSekarang.getCol());
+                    int newDistance = titikSekarang.getDistance() + 1;
+
+                    tempTitik.keBawahKanan();
+                    tempTitik.setDistance(newDistance);
+
+                    isVisited[tempTitik.getRow()][tempTitik.getCol()] = true;
+                    mazeHistory[tempTitik.getRow()][tempTitik.getCol()] = titikSekarang;
+
+                    queue.offer(tempTitik);
+                    nodeChecked++;
+
                 }
             } catch (ArrayIndexOutOfBoundsException ignored) {}
         }
@@ -97,7 +186,7 @@ public class solveMaze {
         return 0;
     }
 
-    public void printVisualisasi(String[][] maze, Koordinat[][] mazeHistory, int[][] mazeHistoryDist, Koordinat titikSekarang) {
+    public void printVisualisasi(String[][] maze, Koordinat[][] mazeHistory, int[][] mazeHistoryDist, Koordinat titikSekarang, int nodeChecked) {
         System.out.println("|| --> Visualisasi: ");
         System.out.println("||\t\tJalan yang bisa diakses : " + "\uD83D\uDFE1");
         System.out.println("||\t\tJalan yang Terblokir / not visited : " + "\uD83D\uDEA7");
@@ -108,14 +197,20 @@ public class solveMaze {
         System.out.println("|| ");
 
         System.out.println("||    ▪ Koordinat didalamnya:");
-        printKoordinatMaze(maze);
+        printKoordinatSoal(maze);
+
+        System.out.println("|| ");
+        System.out.println("||    ▪ Koordinat Jejak:");
+        printKoordinatJejak(mazeHistory);
+
         System.out.println("|| ");
         System.out.println("||    ▪ Perhitungan jarak tiap titik:");
         printMazeDistance(mazeHistoryDist);
+        System.out.println("|| ");
+        System.out.println("||    ▪ Node yang dicek: " + nodeChecked);
     }
 
     private void printMazePath(String[][] maze, Koordinat[][] mazeHistory, Koordinat destination) {
-
         String[][] fixedPath = new String[maze.length][maze[0].length];
 
         for (int i = 0; i < maze.length; i++) {
@@ -134,10 +229,9 @@ public class solveMaze {
         Koordinat next;
 
         while (currentRow != -1 && currentCol != -1) {
-
             fixedPath[currentRow][currentCol] = "\uD83D\uDEE4️";
 
-            next =  mazeHistory[currentRow][currentCol];
+            next = mazeHistory[currentRow][currentCol]; //koordinat object 1,4
 
             if (next != null) {
                 currentRow = next.getRow();
@@ -159,7 +253,7 @@ public class solveMaze {
         }
     }
 
-    private void printKoordinatMaze(String [][] maze) {
+    private void printKoordinatSoal(String [][] maze) {
         for (int i = 0; i < maze.length; i++) {
             System.out.print("||\t\t");
 
@@ -167,6 +261,23 @@ public class solveMaze {
                 String k = maze[i][j];
                 if (k.equals(" ")) {
                     System.out.print("{" + i + "," + j + "}|");
+                } else {
+                    System.out.print("\uD83D\uDEA7.\uD83D\uDEA7|");
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
+    private void printKoordinatJejak(Koordinat [][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            System.out.print("||\t\t");
+
+            for (int j = 0; j < maze[i].length; j++) {
+                Koordinat check = maze[i][j];
+                if (check != null) {
+                    System.out.print("{" + maze[i][j].getRow() + "," + maze[i][j].getCol() + "}|");
                 } else {
                     System.out.print("\uD83D\uDEA7.\uD83D\uDEA7|");
                 }
