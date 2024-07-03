@@ -125,7 +125,7 @@ public class solveMaze {
                 }
             }
         }
-
+//         init
         int currentRow = destination.getRow();
         int currentCol = destination.getCol();
 
