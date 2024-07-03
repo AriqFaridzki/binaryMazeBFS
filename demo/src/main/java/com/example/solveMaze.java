@@ -196,7 +196,12 @@ public class solveMaze {
         System.out.println("|| ");
 
         System.out.println("||    ▪ Koordinat didalamnya:");
-        printKoordinatMaze(maze);
+        printKoordinatSoal(maze);
+
+        System.out.println("|| ");
+        System.out.println("||    ▪ Koordinat Jejak:");
+        printKoordinatJejak(mazeHistory);
+
         System.out.println("|| ");
         System.out.println("||    ▪ Perhitungan jarak tiap titik:");
         printMazeDistance(mazeHistoryDist);
@@ -247,7 +252,7 @@ public class solveMaze {
         }
     }
 
-    private void printKoordinatMaze(String [][] maze) {
+    private void printKoordinatSoal(String [][] maze) {
         for (int i = 0; i < maze.length; i++) {
             System.out.print("||\t\t");
 
@@ -255,6 +260,23 @@ public class solveMaze {
                 String k = maze[i][j];
                 if (k.equals(" ")) {
                     System.out.print("{" + i + "," + j + "}|");
+                } else {
+                    System.out.print("\uD83D\uDEA7.\uD83D\uDEA7|");
+                }
+            }
+
+            System.out.println();
+        }
+    }
+
+    private void printKoordinatJejak(Koordinat [][] maze) {
+        for (int i = 0; i < maze.length; i++) {
+            System.out.print("||\t\t");
+
+            for (int j = 0; j < maze[i].length; j++) {
+                Koordinat check = maze[i][j];
+                if (check != null) {
+                    System.out.print("{" + maze[i][j].getRow() + "," + maze[i][j].getCol() + "}|");
                 } else {
                     System.out.print("\uD83D\uDEA7.\uD83D\uDEA7|");
                 }
