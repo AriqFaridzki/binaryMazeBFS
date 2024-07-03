@@ -209,7 +209,7 @@ public class solveMaze {
 
         for (int i = 0; i < maze.length; i++) {
             for (int j = 0; j < maze[i].length; j++) {
-                if (maze[i][j].equals("||\t\t")){
+                if (maze[i][j].equals(" ")){
                     fixedPath[i][j] = "\uD83D\uDFE1";
                 } else {
                     fixedPath[i][j] = "\uD83D\uDEA7";
