@@ -5,6 +5,7 @@ import java.util.Queue;
 
 public class solveMaze {
     public int bfs(String[][] maze, Koordinat titikAwal, Koordinat titikAkhir) {
+
         int mazeRow = maze.length;
         int mazeCol = maze[0].length;
         boolean[][] isVisited = new boolean[mazeRow][mazeCol];
@@ -114,6 +115,7 @@ public class solveMaze {
     }
 
     private void printMazePath(String[][] maze, Koordinat[][] mazeHistory, Koordinat destination) {
+
         String[][] fixedPath = new String[maze.length][maze[0].length];
 
         for (int i = 0; i < maze.length; i++) {
@@ -132,6 +134,7 @@ public class solveMaze {
         Koordinat next;
 
         while (currentRow != -1 && currentCol != -1) {
+
             fixedPath[currentRow][currentCol] = "\uD83D\uDEE4️";
 
             next =  mazeHistory[currentRow][currentCol];
