@@ -14,6 +14,7 @@ public class solveMaze {
         Koordinat[][] mazeHistory = new Koordinat[mazeRow][mazeCol];
 
         Queue<Koordinat> queue = new LinkedList<>();
+        // lets simpan koordinat for each steps
         queue.offer(titikAwal);
 
         isVisited[titikAwal.getRow()][titikAwal.getCol()] = true;
@@ -27,11 +28,9 @@ public class solveMaze {
             int titikAkhirRow = titikAkhir.getRow();
             int titikAkhirCol = titikAkhir.getCol();
 
-            if (titikSekarang.getRow() == titikAkhirRow) {
-                if (titikSekarang.getCol() == titikAkhirCol) {
-                    printVisualisasi(maze, mazeHistory, mazeHistoryDist, titikSekarang, nodeChecked);
-                    return titikSekarang.getDistance();
-                }
+            if (titikSekarang.getRow() == titikAkhirRow && titikSekarang.getCol() == titikAkhirCol) {
+                printVisualisasi(maze, mazeHistory, mazeHistoryDist, titikSekarang, nodeChecked);
+                return titikSekarang.getDistance();
             }
 
             try {
@@ -182,7 +181,7 @@ public class solveMaze {
             } catch (ArrayIndexOutOfBoundsException ignored) {}
         }
 
-        return 0;
+        return 0 ;
     }
 
     public void printVisualisasi(String[][] maze, Koordinat[][] mazeHistory, int[][] mazeHistoryDist, Koordinat titikSekarang, int nodeChecked) {
@@ -222,7 +221,7 @@ public class solveMaze {
 
         Koordinat next;
 
-        while (currentRow != -1 && currentCol != -1) {
+                while (currentRow != -1 && currentCol != -1) {
             fixedPath[currentRow][currentCol] = "\uD83D\uDEE4️";
 
             next = mazeHistory[currentRow][currentCol];
