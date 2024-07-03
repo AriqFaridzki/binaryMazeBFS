@@ -225,7 +225,7 @@ public class solveMaze {
         while (currentRow != -1 && currentCol != -1) {
             fixedPath[currentRow][currentCol] = "\uD83D\uDEE4️";
 
-            next = mazeHistory[currentRow][currentCol];
+            next = mazeHistory[currentRow][currentCol]; //koordinat object 1,4
 
             if (next != null) {
                 currentRow = next.getRow();
